@@ -32,7 +32,8 @@ export const BenefitsForm = () => {
   const [videoScriptLoaded, setVideoScriptLoaded] = useState(false);
   const [selectedPaymentMethod, setSelectedPaymentMethod] = useState<'paypal' | 'bank' | null>(null);
   const [submittedName, setSubmittedName] = useState<string>('');
-  const { formatTime, isExpired } = useTimer(15);
+  const [showSpecialOffer, setShowSpecialOffer] = useState(false);
+  const { formatTime, isExpired, seconds } = useTimer(15);
 
   // Load video script when reaching step 4
   useEffect(() => {
@@ -44,6 +45,13 @@ export const BenefitsForm = () => {
       setVideoScriptLoaded(true);
     }
   }, [currentStep, videoScriptLoaded]);
+
+  // Show special offer at 20:28 (when 272 seconds remain - 4:32 left)
+  useEffect(() => {
+    if (currentStep === 4 && seconds === 272) {
+      setShowSpecialOffer(true);
+    }
+  }, [currentStep, seconds]);
   
   const form = useForm<FormData>({
     resolver: zodResolver(formSchema),
@@ -405,6 +413,39 @@ export const BenefitsForm = () => {
               }}
             />
           </div>
+
+          {/* Special Offer Section - appears at 20:28 */}
+          {showSpecialOffer && (
+            <div className="bg-gradient-to-r from-red-600 to-red-700 text-white py-8 px-6">
+              <div className="max-w-4xl mx-auto text-center">
+                <div className="bg-yellow-400 text-black inline-block px-4 py-2 rounded-full text-lg font-bold mb-4">
+                  ⚡ LIMITED TIME OFFER ⚡
+                </div>
+                
+                <div className="text-3xl md:text-4xl font-bold mb-4">
+                  <span className="line-through text-red-200">From $127</span>
+                  <span className="block text-yellow-300">for just $19.90</span>
+                </div>
+                
+                <p className="text-xl mb-6 opacity-90">
+                  This exclusive discount expires in minutes!
+                </p>
+                
+                <a
+                  href="https://pay.hotmart.com/P99708474M?off=1kx22q47&checkoutMode=10"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-block bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-xl px-8 py-4 rounded-lg shadow-lg transition-all duration-300 transform hover:scale-105"
+                >
+                  🚀 CLAIM $2,324.00 NOW!
+                </a>
+                
+                <div className="mt-4 text-sm opacity-75">
+                  ⏰ Offer valid for limited time only
+                </div>
+              </div>
+            </div>
+          )}
         </main>
       )}
     </div>
