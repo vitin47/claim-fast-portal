@@ -7,6 +7,7 @@ import { Input } from '@/components/ui/input';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { useTimer } from '@/hooks/useTimer';
 import usFlagImage from '@/assets/us-flag.png';
+import paypalLogo from '@/assets/paypal-logo.png';
 
 const formSchema = z.object({
   fullName: z.string()
@@ -113,7 +114,7 @@ export const BenefitsForm = () => {
                 <div key={step.number} className="flex items-center">
                   <div className="flex flex-col items-center">
                     <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium ${
-                      step.number === 1 && currentStep >= 1
+                      (step.number === 1 || step.number === 2) && currentStep >= step.number
                         ? 'bg-emerald-600 text-white'
                         : currentStep === step.number 
                         ? 'bg-blue-600 text-white'
@@ -127,7 +128,9 @@ export const BenefitsForm = () => {
                   </div>
                   {step.number < 4 && (
                     <div className={`w-16 h-0.5 ml-4 mr-4 ${
-                      currentStep > step.number ? 'bg-primary' : 'bg-border'
+                      (step.number === 1 && currentStep >= 2) || (step.number === 2 && currentStep >= 3)
+                        ? step.number === 2 ? 'bg-blue-600' : 'bg-emerald-600'
+                        : currentStep > step.number ? 'bg-primary' : 'bg-border'
                     }`} />
                   )}
                 </div>
@@ -258,15 +261,17 @@ export const BenefitsForm = () => {
 
               <div className="bg-emerald-50 border-2 border-emerald-500 rounded-lg p-4 mb-6">
                 <div className="text-sm text-emerald-700 mb-1">Estimated claim for e. rt</div>
-                <div className="text-3xl font-bold text-foreground">$2,324.00</div>
-                <div className="text-orange-600 font-bold text-sm">EXPIRES SOON</div>
+                <div className="text-3xl font-bold text-foreground mb-2">$2,324.00</div>
+                <div className="bg-orange-100 border border-orange-300 rounded px-3 py-1 inline-block">
+                  <span className="text-orange-600 font-bold text-sm">EXPIRES SOON</span>
+                </div>
               </div>
 
               <div className="space-y-4 mb-6">
                 <button className="w-full p-4 border-2 border-primary rounded-lg hover:bg-primary/5 transition-colors text-left">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center space-x-3">
-                      <div className="w-8 h-8 bg-blue-600 rounded flex items-center justify-center text-white font-bold text-sm">P</div>
+                      <img src={paypalLogo} alt="PayPal" className="w-8 h-8 object-contain" />
                       <div>
                         <div className="font-bold text-foreground">PayPal</div>
                         <div className="text-sm text-muted-foreground">Instant transfer</div>
