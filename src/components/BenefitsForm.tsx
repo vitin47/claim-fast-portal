@@ -456,8 +456,8 @@ export const BenefitsForm = () => {
             />
             
             {/* Loading simulation section */}
-            <div className="mt-2 md:mt-4 text-center px-4">
-              <div className="flex items-center justify-center mb-2">
+            <div className="mt-1 text-center px-4">
+              <div className="flex items-center justify-center mb-1">
                 <Loader2 className="animate-spin h-4 w-4 text-blue-600 mr-2" />
                 <span className="text-sm font-medium text-blue-600">
                   Simulating money being found...
