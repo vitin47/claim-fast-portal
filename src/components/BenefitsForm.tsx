@@ -38,6 +38,13 @@ export const BenefitsForm = () => {
       const script = document.createElement("script");
       script.src = "https://scripts.converteai.net/7fa7ad44-7b14-4fcc-805a-1257ccc47e90/players/68d8a308d682a389eb6ed723/v4/player.js";
       script.async = true;
+      script.onload = () => {
+        // Create the video player after script loads
+        const videoContainer = document.getElementById('video-container');
+        if (videoContainer) {
+          videoContainer.innerHTML = '<vturb-smartplayer id="vid-68d8a308d682a389eb6ed723" style="display: block; margin: 0 auto; width: 100%; height: 100%;"></vturb-smartplayer>';
+        }
+      };
       document.head.appendChild(script);
       setVideoScriptLoaded(true);
     }
@@ -379,12 +386,16 @@ export const BenefitsForm = () => {
             Watch this important message
           </h2>
           
-          <div className="w-full h-full">
-            <div 
-              dangerouslySetInnerHTML={{
-                __html: `<vturb-smartplayer id="vid-68d8a308d682a389eb6ed723" style="display: block; margin: 0 auto; width: 100%; height: calc(100vh - 80px);"></vturb-smartplayer>`
-              }}
-            />
+          <div 
+            id="video-container" 
+            className="w-full" 
+            style={{ height: 'calc(100vh - 80px)' }}
+          >
+            {!videoScriptLoaded && (
+              <div className="flex items-center justify-center h-full text-white">
+                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white"></div>
+              </div>
+            )}
           </div>
         </div>
       )}
