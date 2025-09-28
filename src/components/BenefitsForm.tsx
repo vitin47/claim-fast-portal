@@ -129,9 +129,6 @@ export const BenefitsForm = () => {
                 </div>
               ))}
             </div>
-            <span className="text-sm text-muted-foreground">
-              Step {currentStep} of 4
-            </span>
           </div>
         </div>
       </div>
@@ -226,19 +223,22 @@ export const BenefitsForm = () => {
 
               {showAmount && (
                 <div className="space-y-6">
-                  <div className="bg-emergency/10 border-2 border-emergency rounded-lg p-6">
-                    <div className="text-emergency font-bold text-sm mb-2">LIMITED TIME</div>
+                  <div className="bg-emerald-50 border-2 border-emerald-500 rounded-lg p-6">
+                    <div className="text-emerald-700 font-bold text-sm mb-2">LIMITED TIME</div>
                     <div className="text-4xl font-bold text-foreground mb-2">$2,324.00</div>
                     <div className="text-emerald-700 font-bold text-lg mb-4">APPROVED</div>
-                    <div className="text-emergency text-sm font-medium">
+                    <div className="text-emerald-700 text-sm font-medium">
                       ⏰ Claim Expires: This amount is reserved for 15 minutes only
                     </div>
                   </div>
                   <p className="text-muted-foreground">
                     Proceed to choose how you'd like to receive funds.
                   </p>
-                  <Button className="w-full h-12 text-base font-medium bg-emergency hover:bg-emergency/90 text-emergency-foreground">
-                    Continue to Payout Options →
+                  <Button 
+                    className="w-full h-12 text-base font-medium bg-emerald-600 hover:bg-emerald-700 text-white"
+                    onClick={() => setCurrentStep(3)}
+                  >
+                    Secure My Funds
                   </Button>
                 </div>
               )}
