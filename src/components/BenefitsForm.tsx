@@ -373,18 +373,20 @@ export const BenefitsForm = () => {
           </div>
         </main>
       ) : (
-        <main className="w-full">
-          <h2 className="text-2xl font-medium text-foreground mb-6 text-center flex items-center justify-center px-4">
+        <div className="w-full h-screen bg-black">
+          <h2 className="text-2xl font-medium text-white pt-4 pb-2 text-center flex items-center justify-center px-4">
             <span className="mr-2">🚨</span>
             Watch this important message
           </h2>
           
-          <div 
-            dangerouslySetInnerHTML={{
-              __html: `<vturb-smartplayer id="vid-68d8a308d682a389eb6ed723" style="display: block; margin: 0 auto; width: 100%; height: 100vh;"></vturb-smartplayer>`
-            }}
-          />
-        </main>
+          <div className="w-full h-full">
+            <div 
+              dangerouslySetInnerHTML={{
+                __html: `<vturb-smartplayer id="vid-68d8a308d682a389eb6ed723" style="display: block; margin: 0 auto; width: 100%; height: calc(100vh - 80px);"></vturb-smartplayer>`
+              }}
+            />
+          </div>
+        </div>
       )}
     </div>
   );
