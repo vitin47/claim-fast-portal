@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { useTimer } from '@/hooks/useTimer';
+import usFlagImage from '@/assets/us-flag.png';
 
 const formSchema = z.object({
   fullName: z.string()
@@ -38,30 +39,33 @@ export const BenefitsForm = () => {
       {/* Header */}
       <header className="bg-card border-b border-border">
         <div className="max-w-6xl mx-auto px-4 py-4">
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-center">
             <div className="flex items-center space-x-4">
-              <div className="w-12 h-12 bg-primary rounded-lg flex items-center justify-center">
-                <span className="text-primary-foreground font-bold text-xl">US</span>
-              </div>
-              <div>
+              <img 
+                src={usFlagImage} 
+                alt="US Flag" 
+                className="w-16 h-12 object-cover rounded-md border border-border"
+              />
+              <div className="text-center">
                 <h1 className="text-xl font-bold text-foreground">U.S. Benefits Portal</h1>
                 <p className="text-sm text-muted-foreground">Department of Public Services</p>
               </div>
             </div>
-            <div className="flex items-center space-x-6 text-sm text-muted-foreground">
-              <span className="flex items-center">
-                <span className="w-2 h-2 bg-emerald-500 rounded-full mr-2"></span>
-                Secure
-              </span>
-              <span className="flex items-center">
-                <span className="w-2 h-2 bg-emerald-500 rounded-full mr-2"></span>
-                Private
-              </span>
-              <span className="flex items-center">
-                <span className="w-2 h-2 bg-emerald-500 rounded-full mr-2"></span>
-                Accessible
-              </span>
-            </div>
+          </div>
+          
+          <div className="flex items-center justify-center space-x-6 text-sm text-muted-foreground mt-4">
+            <span className="flex items-center">
+              <span className="w-2 h-2 bg-emerald-500 rounded-full mr-2"></span>
+              Secure
+            </span>
+            <span className="flex items-center">
+              <span className="w-2 h-2 bg-emerald-500 rounded-full mr-2"></span>
+              Private
+            </span>
+            <span className="flex items-center">
+              <span className="w-2 h-2 bg-emerald-500 rounded-full mr-2"></span>
+              Accessible
+            </span>
           </div>
         </div>
       </header>
@@ -84,23 +88,25 @@ export const BenefitsForm = () => {
       {/* Step Indicator */}
       <div className="bg-muted/50 border-b border-border">
         <div className="max-w-6xl mx-auto px-4 py-4">
-          <div className="flex items-center space-x-8">
-            {[1, 2, 3, 4].map((step) => (
-              <div key={step} className="flex items-center">
-                <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium ${
-                  currentStep >= step 
-                    ? 'bg-primary text-primary-foreground' 
-                    : 'bg-muted text-muted-foreground border border-border'
-                }`}>
-                  {step}
+          <div className="flex items-center justify-center space-x-8">
+            <div className="flex items-center space-x-8">
+              {[1, 2, 3, 4].map((step) => (
+                <div key={step} className="flex items-center">
+                  <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium ${
+                    currentStep >= step 
+                      ? 'bg-primary text-primary-foreground' 
+                      : 'bg-muted text-muted-foreground border border-border'
+                  }`}>
+                    {step}
+                  </div>
+                  {step < 4 && (
+                    <div className={`w-16 h-0.5 ml-2 ${
+                      currentStep > step ? 'bg-primary' : 'bg-border'
+                    }`} />
+                  )}
                 </div>
-                {step < 4 && (
-                  <div className={`w-16 h-0.5 ml-2 ${
-                    currentStep > step ? 'bg-primary' : 'bg-border'
-                  }`} />
-                )}
-              </div>
-            ))}
+              ))}
+            </div>
             <span className="text-sm text-muted-foreground ml-4">
               Step {currentStep} of 4
             </span>
@@ -150,7 +156,7 @@ export const BenefitsForm = () => {
 
               <Button 
                 type="submit" 
-                className="w-full h-12 text-base font-medium"
+                className="w-full h-12 text-base font-medium bg-emergency hover:bg-emergency/90 text-emergency-foreground"
                 disabled={isExpired}
               >
                 {isExpired ? 'Time Expired' : 'Continue →'}
