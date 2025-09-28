@@ -380,16 +380,15 @@ export const BenefitsForm = () => {
           </div>
         </main>
       ) : (
-        <div className="w-full h-screen bg-black">
-          <h2 className="text-2xl font-medium text-white pt-4 pb-2 text-center flex items-center justify-center px-4">
+        <div className="w-full h-screen bg-black flex flex-col">
+          <h2 className="text-2xl font-medium text-white pt-4 pb-4 text-center flex items-center justify-center px-4">
             <span className="mr-2">🚨</span>
             Watch this important message
           </h2>
           
           <div 
             id="video-container" 
-            className="w-full" 
-            style={{ height: 'calc(100vh - 80px)' }}
+            className="flex-1 w-full"
           >
             {!videoScriptLoaded && (
               <div className="flex items-center justify-center h-full text-white">
