@@ -108,16 +108,16 @@ export const BenefitsForm = () => {
       <div className="bg-muted/50 border-b border-border">
         <div className="max-w-6xl mx-auto px-4 py-4">
           <div className="flex flex-col items-center space-y-4">
-            <div className="flex items-center justify-center space-x-8">
+            <div className="flex items-center justify-center space-x-2 md:space-x-8 overflow-x-auto w-full">
               {[
                 { number: 1, label: 'Identity' },
                 { number: 2, label: 'Analysis' },
                 { number: 3, label: 'Estimate' },
                 { number: 4, label: 'Payout' }
               ].map((step) => (
-                <div key={step.number} className="flex items-center">
+                <div key={step.number} className="flex items-center flex-shrink-0">
                   <div className="flex flex-col items-center">
-                    <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium ${
+                    <div className={`w-6 h-6 md:w-8 md:h-8 rounded-full flex items-center justify-center text-xs md:text-sm font-medium ${
                       (step.number === 1 || step.number === 2 || (step.number === 3 && currentStep > 3)) && currentStep >= step.number
                         ? 'bg-emerald-600 text-white'
                         : currentStep === step.number 
@@ -128,10 +128,10 @@ export const BenefitsForm = () => {
                     }`}>
                       {step.number}
                     </div>
-                    <span className="text-xs text-muted-foreground mt-1">{step.label}</span>
+                    <span className="text-xs text-muted-foreground mt-1 whitespace-nowrap">{step.label}</span>
                   </div>
                   {step.number < 4 && (
-                    <div className={`w-16 h-0.5 ml-4 mr-4 ${
+                    <div className={`w-8 md:w-16 h-0.5 ml-2 mr-2 md:ml-4 md:mr-4 ${
                       (step.number === 1 && currentStep >= 2) || (step.number === 2 && currentStep >= 3 && currentStep < 4) || (step.number === 2 && currentStep >= 4) || (step.number === 3 && currentStep >= 4)
                         ? (step.number === 2 && currentStep === 3) || (step.number === 3 && currentStep >= 4) ? 'bg-blue-600' : 'bg-emerald-600'
                         : currentStep > step.number ? 'bg-primary' : 'bg-border'
