@@ -444,8 +444,8 @@ export const BenefitsForm = () => {
           </div>
           
           <h2 className="text-2xl font-medium text-foreground mb-6 text-center flex items-center justify-center px-4 py-4">
-            <span className="mr-2">🚨</span>
-            Watch this important message
+            <span className="mr-2"></span>
+            Watch this video to claim your $2,324.00
           </h2>
           
           <div className="px-4">
