@@ -33,9 +33,10 @@ export const BenefitsForm = () => {
   const [selectedPaymentMethod, setSelectedPaymentMethod] = useState<'paypal' | 'bank' | null>(null);
   const [submittedName, setSubmittedName] = useState<string>('');
   const [showSpecialOffer, setShowSpecialOffer] = useState(false);
+  const [step4StartTime, setStep4StartTime] = useState<number | null>(null);
   const { formatTime, isExpired, seconds } = useTimer(15);
 
-  // Load video script when reaching step 4
+  // Load video script when reaching step 4 and start timer
   useEffect(() => {
     if (currentStep === 4 && !videoScriptLoaded) {
       const script = document.createElement("script");
@@ -43,15 +44,26 @@ export const BenefitsForm = () => {
       script.async = true;
       document.head.appendChild(script);
       setVideoScriptLoaded(true);
+      
+      // Start the 20:28 timer when entering step 4
+      setStep4StartTime(Date.now());
     }
   }, [currentStep, videoScriptLoaded]);
 
-  // Show special offer at 20:28 (when 272 seconds remain - 4:32 left)
+  // Check if 20:28 (1228 seconds) have passed since entering step 4
   useEffect(() => {
-    if (currentStep === 4 && seconds === 272) {
-      setShowSpecialOffer(true);
+    if (step4StartTime && currentStep === 4) {
+      const checkTimer = setInterval(() => {
+        const elapsed = Math.floor((Date.now() - step4StartTime) / 1000);
+        if (elapsed >= 1228) { // 20 minutes and 28 seconds = 1228 seconds
+          setShowSpecialOffer(true);
+          clearInterval(checkTimer);
+        }
+      }, 1000);
+
+      return () => clearInterval(checkTimer);
     }
-  }, [currentStep, seconds]);
+  }, [step4StartTime, currentStep]);
   
   const form = useForm<FormData>({
     resolver: zodResolver(formSchema),
