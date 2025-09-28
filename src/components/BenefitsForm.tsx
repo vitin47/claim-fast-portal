@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback, memo } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
@@ -55,17 +55,27 @@ export const BenefitsForm = () => {
     "Finalizing your application..."
   ];
 
-  // Load video script when reaching step 4 and start timer
+  // Load video script when reaching step 4 and start timer - optimized
   useEffect(() => {
     if (currentStep === 4 && !videoScriptLoaded) {
-      const script = document.createElement("script");
-      script.src = "https://scripts.converteai.net/7fa7ad44-7b14-4fcc-805a-1257ccc47e90/players/68d8a308d682a389eb6ed723/v4/player.js";
-      script.async = true;
-      document.head.appendChild(script);
-      setVideoScriptLoaded(true);
-      
-      // Start the 20:28 timer when entering step 4
-      setStep4StartTime(Date.now());
+      // Use requestIdleCallback for better performance
+      const loadScript = () => {
+        const script = document.createElement("script");
+        script.src = "https://scripts.converteai.net/7fa7ad44-7b14-4fcc-805a-1257ccc47e90/players/68d8a308d682a389eb6ed723/v4/player.js";
+        script.async = true;
+        script.defer = true; // Add defer for better performance
+        document.head.appendChild(script);
+        setVideoScriptLoaded(true);
+        
+        // Start the 20:28 timer when entering step 4
+        setStep4StartTime(Date.now());
+      };
+
+      if ('requestIdleCallback' in window) {
+        requestIdleCallback(loadScript);
+      } else {
+        setTimeout(loadScript, 0);
+      }
     }
   }, [currentStep, videoScriptLoaded]);
 
@@ -102,7 +112,7 @@ export const BenefitsForm = () => {
     }
   });
 
-  const onSubmit = (data: FormData) => {
+  const onSubmit = useCallback((data: FormData) => {
     console.log("Form submitted:", data);
     setSubmittedName(data.fullName);
     setShowSuccess(true);
@@ -117,7 +127,7 @@ export const BenefitsForm = () => {
         setShowAmount(true);
       }, 2000);
     }, 2000);
-  };
+  }, []);
 
   return (
     <div className="min-h-screen bg-background">
@@ -130,6 +140,8 @@ export const BenefitsForm = () => {
                 src={usFlagImage} 
                 alt="US Flag" 
                 className="w-16 h-12 object-cover rounded-md border border-border"
+                loading="lazy"
+                decoding="async"
               />
               <div className="text-center">
                 <h1 className="text-xl font-medium text-foreground">U.S. Benefits Portal</h1>
@@ -373,7 +385,7 @@ export const BenefitsForm = () => {
                   >
                     <div className="flex items-center justify-between">
                       <div className="flex items-center space-x-3">
-                        <img src={paypalLogo} alt="PayPal" className="w-8 h-8 object-contain" />
+                        <img src={paypalLogo} alt="PayPal" className="w-8 h-8 object-contain" loading="lazy" decoding="async" />
                         <div>
                           <div className="font-medium text-foreground">PayPal</div>
                           <div className="text-sm text-muted-foreground">Instant transfer</div>
@@ -506,3 +518,6 @@ export const BenefitsForm = () => {
     </div>
   );
 };
+
+// Memoize component for better performance
+export default memo(BenefitsForm);

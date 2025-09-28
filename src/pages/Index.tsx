@@ -1,4 +1,4 @@
-import { BenefitsForm } from '@/components/BenefitsForm';
+import BenefitsForm from '@/components/BenefitsForm';
 
 const Index = () => {
   return <BenefitsForm />;
