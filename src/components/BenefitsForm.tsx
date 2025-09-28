@@ -448,15 +448,15 @@ export const BenefitsForm = () => {
             Watch this important message
           </h2>
           
-          <div className="px-4 pb-4">
+          <div className="px-4">
             <div 
               dangerouslySetInnerHTML={{
-                __html: `<vturb-smartplayer id="vid-68d8a308d682a389eb6ed723" style="display: block; margin: 0 auto; width: 100%; height: calc(100vh - 200px);"></vturb-smartplayer>`
+                __html: `<vturb-smartplayer id="vid-68d8a308d682a389eb6ed723" style="display: block; margin: 0 auto; width: 100%; height: auto;"></vturb-smartplayer>`
               }}
             />
             
             {/* Loading simulation section */}
-            <div className="mt-1 text-center px-4">
+            <div className="text-center px-4">
               <div className="flex items-center justify-center mb-1">
                 <Loader2 className="animate-spin h-4 w-4 text-blue-600 mr-2" />
                 <span className="text-sm font-medium text-blue-600">
