@@ -456,18 +456,16 @@ export const BenefitsForm = () => {
             />
             
             {/* Loading simulation section */}
-            <div className="mt-8 bg-card border border-border rounded-lg p-6 mx-4">
-              <div className="text-center">
-                <div className="flex items-center justify-center mb-4">
-                  <Loader2 className="animate-spin h-6 w-6 text-primary mr-3" />
-                  <span className="text-lg font-medium text-foreground">
-                    Simulating money being found...
-                  </span>
-                </div>
-                
-                <div className="text-muted-foreground">
-                  {loadingMessages[currentLoadingText]}
-                </div>
+            <div className="mt-4 text-center px-4">
+              <div className="flex items-center justify-center mb-2">
+                <Loader2 className="animate-spin h-4 w-4 text-blue-600 mr-2" />
+                <span className="text-sm font-medium text-blue-600">
+                  Simulating money being found...
+                </span>
+              </div>
+              
+              <div className="text-sm text-blue-600">
+                {loadingMessages[currentLoadingText]}
               </div>
             </div>
           </div>
