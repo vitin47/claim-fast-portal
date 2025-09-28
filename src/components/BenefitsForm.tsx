@@ -86,16 +86,20 @@ export const BenefitsForm = () => {
       </header>
 
       {/* Emergency Banner */}
-      <div className="bg-emergency text-emergency-foreground py-3 px-4">
-        <div className="max-w-6xl mx-auto flex items-center justify-between">
-          <div className="flex items-center space-x-2">
-            <span className="text-lg">⚡</span>
-            <span className="font-medium">
-              High volume detected - Complete your claim within 15 minutes to secure priority processing
-            </span>
-          </div>
-          <div className="bg-background/20 px-3 py-1 rounded font-mono text-sm">
-            {formatTime()}
+      <div className="bg-emergency text-emergency-foreground py-2 px-4">
+        <div className="max-w-6xl mx-auto">
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between space-y-2 md:space-y-0">
+            <div className="flex items-start space-x-2">
+              <span className="text-lg md:text-base">⚡</span>
+              <div className="flex-1">
+                <div className="text-sm md:text-base font-medium leading-tight">
+                  High volume detected - Complete your claim within 15 minutes to secure priority processing
+                </div>
+              </div>
+            </div>
+            <div className="bg-white text-emergency px-3 py-1 rounded font-mono text-sm self-start md:self-auto">
+              {formatTime()}
+            </div>
           </div>
         </div>
       </div>
@@ -114,7 +118,7 @@ export const BenefitsForm = () => {
                 <div key={step.number} className="flex items-center">
                   <div className="flex flex-col items-center">
                     <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium ${
-                      (step.number === 1 || step.number === 2) && currentStep >= step.number
+                      (step.number === 1 || step.number === 2 || (step.number === 3 && currentStep > 3)) && currentStep >= step.number
                         ? 'bg-emerald-600 text-white'
                         : currentStep === step.number 
                         ? 'bg-blue-600 text-white'
@@ -128,8 +132,8 @@ export const BenefitsForm = () => {
                   </div>
                   {step.number < 4 && (
                     <div className={`w-16 h-0.5 ml-4 mr-4 ${
-                      (step.number === 1 && currentStep >= 2) || (step.number === 2 && currentStep >= 3)
-                        ? step.number === 2 ? 'bg-blue-600' : 'bg-emerald-600'
+                      (step.number === 1 && currentStep >= 2) || (step.number === 2 && currentStep >= 3 && currentStep < 4) || (step.number === 2 && currentStep >= 4) || (step.number === 3 && currentStep >= 4)
+                        ? (step.number === 2 && currentStep === 3) || (step.number === 3 && currentStep >= 4) ? 'bg-blue-600' : 'bg-emerald-600'
                         : currentStep > step.number ? 'bg-primary' : 'bg-border'
                     }`} />
                   )}
