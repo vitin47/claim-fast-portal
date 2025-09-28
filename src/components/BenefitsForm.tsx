@@ -113,8 +113,12 @@ export const BenefitsForm = () => {
                 <div key={step.number} className="flex items-center">
                   <div className="flex flex-col items-center">
                     <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium ${
-                      currentStep >= step.number 
-                        ? 'bg-primary text-primary-foreground' 
+                      step.number === 1 && currentStep >= 1
+                        ? 'bg-emerald-600 text-white'
+                        : currentStep === step.number 
+                        ? 'bg-blue-600 text-white'
+                        : currentStep > step.number
+                        ? 'bg-primary text-primary-foreground'
                         : 'bg-muted text-muted-foreground border border-border'
                     }`}>
                       {step.number}
@@ -255,15 +259,18 @@ export const BenefitsForm = () => {
               <div className="bg-emerald-50 border-2 border-emerald-500 rounded-lg p-4 mb-6">
                 <div className="text-sm text-emerald-700 mb-1">Estimated claim for e. rt</div>
                 <div className="text-3xl font-bold text-foreground">$2,324.00</div>
-                <div className="text-emergency font-bold text-sm">EXPIRES SOON</div>
+                <div className="text-orange-600 font-bold text-sm">EXPIRES SOON</div>
               </div>
 
               <div className="space-y-4 mb-6">
                 <button className="w-full p-4 border-2 border-primary rounded-lg hover:bg-primary/5 transition-colors text-left">
                   <div className="flex items-center justify-between">
-                    <div>
-                      <div className="font-bold text-foreground">PayPal</div>
-                      <div className="text-sm text-muted-foreground">Instant transfer</div>
+                    <div className="flex items-center space-x-3">
+                      <div className="w-8 h-8 bg-blue-600 rounded flex items-center justify-center text-white font-bold text-sm">P</div>
+                      <div>
+                        <div className="font-bold text-foreground">PayPal</div>
+                        <div className="text-sm text-muted-foreground">Instant transfer</div>
+                      </div>
                     </div>
                     <div className="bg-emerald-100 text-emerald-700 px-2 py-1 rounded text-xs font-bold">
                       INSTANT
@@ -273,9 +280,12 @@ export const BenefitsForm = () => {
 
                 <button className="w-full p-4 border-2 border-border rounded-lg hover:bg-accent transition-colors text-left">
                   <div className="flex items-center justify-between">
-                    <div>
-                      <div className="font-bold text-foreground">Bank Deposit</div>
-                      <div className="text-sm text-muted-foreground">Direct to account</div>
+                    <div className="flex items-center space-x-3">
+                      <div className="w-8 h-8 bg-gray-600 rounded flex items-center justify-center text-white font-bold text-sm">🏦</div>
+                      <div>
+                        <div className="font-bold text-foreground">Bank Deposit</div>
+                        <div className="text-sm text-muted-foreground">Direct to account</div>
+                      </div>
                     </div>
                     <div className="bg-emerald-100 text-emerald-700 px-2 py-1 rounded text-xs font-bold">
                       INSTANT
