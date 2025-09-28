@@ -18,7 +18,7 @@ const formSchema = z.object({
     .refine((name) => {
       const words = name.trim().split(/\s+/);
       return words.length >= 2 && words.every(word => word.length >= 2);
-    }, { message: "Coloque seu nome corretamente" })
+    }, { message: "Please enter your name correctly" })
 });
 
 type FormData = z.infer<typeof formSchema>;
