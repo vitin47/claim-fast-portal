@@ -474,16 +474,16 @@ export const BenefitsForm = () => {
           {showSpecialOffer && (
             <div className="bg-card text-foreground py-8 px-6 border border-border">
               <div className="max-w-4xl mx-auto text-center">
-                <div className="bg-yellow-400 text-black inline-block px-4 py-2 rounded-full text-lg font-bold mb-4">
+                <div className="bg-primary text-primary-foreground inline-block px-4 py-2 rounded-full text-lg font-bold mb-4">
                   ⚡ LIMITED TIME OFFER ⚡
                 </div>
                 
                 <div className="text-3xl md:text-4xl font-bold mb-4">
-                  <span className="line-through text-red-200">From $127</span>
-                  <span className="block text-yellow-300">for just $19.90</span>
+                  <span className="block text-muted-foreground text-lg">From $127</span>
+                  <span className="block text-emerald-600">for just $19.90</span>
                 </div>
                 
-                <p className="text-xl mb-6 opacity-90">
+                <p className="text-xl mb-6 text-muted-foreground">
                   This exclusive discount expires in minutes!
                 </p>
                 
@@ -496,7 +496,7 @@ export const BenefitsForm = () => {
                   🚀 CLAIM $2,324.00 NOW!
                 </a>
                 
-                <div className="mt-4 text-sm opacity-75">
+                <div className="mt-4 text-sm text-muted-foreground">
                   ⏰ Offer valid for limited time only
                 </div>
               </div>
