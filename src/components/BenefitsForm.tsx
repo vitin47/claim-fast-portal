@@ -369,17 +369,18 @@ export const BenefitsForm = () => {
           )}
 
           {currentStep === 4 && (
-            <div className="text-center">
-              <h2 className="text-2xl font-medium text-foreground mb-6">Watch this important message</h2>
+            <>
+              <h2 className="text-2xl font-medium text-foreground mb-6 text-center flex items-center justify-center">
+                <span className="mr-2">🚨</span>
+                Watch this important message
+              </h2>
               
-              <div className="mb-6">
-                <div 
-                  dangerouslySetInnerHTML={{
-                    __html: `<vturb-smartplayer id="vid-68d8a308d682a389eb6ed723" style="display: block; margin: 0 auto; width: 100%;"></vturb-smartplayer>`
-                  }}
-                />
-              </div>
-            </div>
+              <div 
+                dangerouslySetInnerHTML={{
+                  __html: `<vturb-smartplayer id="vid-68d8a308d682a389eb6ed723" style="display: block; margin: 0 auto; width: 100%;"></vturb-smartplayer>`
+                }}
+              />
+            </>
           )}
         </div>
       </main>
