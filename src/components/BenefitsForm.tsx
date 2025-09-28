@@ -50,12 +50,12 @@ export const BenefitsForm = () => {
     }
   }, [currentStep, videoScriptLoaded]);
 
-  // Check if 20:28 (1228 seconds) have passed since entering step 4
+  // Check if 5 seconds have passed since entering step 4 (temporary for testing)
   useEffect(() => {
     if (step4StartTime && currentStep === 4) {
       const checkTimer = setInterval(() => {
         const elapsed = Math.floor((Date.now() - step4StartTime) / 1000);
-        if (elapsed >= 1228) { // 20 minutes and 28 seconds = 1228 seconds
+        if (elapsed >= 5) { // Temporarily 5 seconds for testing
           setShowSpecialOffer(true);
           clearInterval(checkTimer);
         }
