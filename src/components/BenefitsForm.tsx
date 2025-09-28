@@ -30,6 +30,7 @@ export const BenefitsForm = () => {
   const [showAmount, setShowAmount] = useState(false);
   const [videoScriptLoaded, setVideoScriptLoaded] = useState(false);
   const [selectedPaymentMethod, setSelectedPaymentMethod] = useState<'paypal' | 'bank' | null>(null);
+  const [submittedName, setSubmittedName] = useState<string>('');
   const { formatTime, isExpired } = useTimer(15);
 
   // Load video script when reaching step 4
@@ -52,6 +53,7 @@ export const BenefitsForm = () => {
 
   const onSubmit = (data: FormData) => {
     console.log("Form submitted:", data);
+    setSubmittedName(data.fullName);
     setShowSuccess(true);
     
     setTimeout(() => {
@@ -379,7 +381,7 @@ export const BenefitsForm = () => {
             <div className="flex flex-col items-center space-y-1">
               <div className="text-2xl">✓</div>
               <div className="text-xl font-medium">$2,324.00 Approved</div>
-              <div className="text-sm">Name: err rt</div>
+              <div className="text-sm">Name: {submittedName}</div>
               <div className="text-sm font-medium bg-emerald-500 px-3 py-1 rounded">VERIFIED</div>
             </div>
           </div>
