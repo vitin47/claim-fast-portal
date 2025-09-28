@@ -456,7 +456,7 @@ export const BenefitsForm = () => {
             />
             
             {/* Loading simulation section */}
-            <div className="text-center px-4">
+            <div className="mt-2 text-center px-4">
               <div className="flex items-center justify-center mb-1">
                 <Loader2 className="animate-spin h-4 w-4 text-blue-600 mr-2" />
                 <span className="text-sm font-medium text-blue-600">
@@ -472,7 +472,7 @@ export const BenefitsForm = () => {
 
           {/* Special Offer Section - appears at 20:28 */}
           {showSpecialOffer && (
-            <div className="bg-gradient-to-r from-red-600 to-red-700 text-white py-8 px-6">
+            <div className="bg-card text-foreground py-8 px-6 border border-border">
               <div className="max-w-4xl mx-auto text-center">
                 <div className="bg-yellow-400 text-black inline-block px-4 py-2 rounded-full text-lg font-bold mb-4">
                   ⚡ LIMITED TIME OFFER ⚡
