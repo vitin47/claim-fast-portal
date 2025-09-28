@@ -223,12 +223,18 @@ export const BenefitsForm = () => {
           {currentStep === 2 && (
             <div className="text-center">
               <h2 className="text-2xl font-medium text-foreground mb-2">Your estimated claim</h2>
-              <div className="inline-flex items-center bg-emerald-100 text-emerald-700 px-4 py-2 rounded-lg text-lg font-medium mb-4">
-                APPROVED
-              </div>
-              <p className="text-muted-foreground mb-8">
-                Based on your information, this is your current eligible amount.
-              </p>
+              
+              {!showLoading && !showAmount && (
+                <div className="inline-flex items-center bg-emerald-100 text-emerald-700 px-4 py-2 rounded-lg text-lg font-medium mb-4">
+                  APPROVED
+                </div>
+              )}
+              
+              {!showAmount && (
+                <p className="text-muted-foreground mb-8">
+                  Based on your information, this is your current eligible amount.
+                </p>
+              )}
 
               {showLoading && (
                 <div className="flex justify-center mb-8">
@@ -236,8 +242,11 @@ export const BenefitsForm = () => {
                 </div>
               )}
 
-              {showAmount && (
+              {showAmount && !showLoading && (
                 <div className="space-y-6">
+                  <div className="inline-flex items-center bg-emerald-100 text-emerald-700 px-4 py-2 rounded-lg text-lg font-medium mb-4">
+                    APPROVED
+                  </div>
                   <div className="bg-emerald-50 border-2 border-emerald-500 rounded-lg p-6">
                     <div className="text-emerald-700 font-medium text-sm mb-2">LIMITED TIME</div>
                     <div className="text-4xl font-medium text-foreground mb-2">$2,324.00</div>
