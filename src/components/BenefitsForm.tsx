@@ -29,6 +29,7 @@ export const BenefitsForm = () => {
   const [showLoading, setShowLoading] = useState(false);
   const [showAmount, setShowAmount] = useState(false);
   const [videoScriptLoaded, setVideoScriptLoaded] = useState(false);
+  const [selectedPaymentMethod, setSelectedPaymentMethod] = useState<'paypal' | 'bank' | null>(null);
   const { formatTime, isExpired } = useTimer(15);
 
   // Load video script when reaching step 4
@@ -306,7 +307,14 @@ export const BenefitsForm = () => {
               </div>
 
               <div className="space-y-4 mb-6">
-                <button className="w-full p-4 border-2 border-primary rounded-lg hover:bg-primary/5 transition-colors text-left">
+                <button 
+                  className={`w-full p-4 border-2 rounded-lg hover:bg-primary/5 transition-colors text-left ${
+                    selectedPaymentMethod === 'paypal' 
+                      ? 'border-primary bg-primary/5' 
+                      : 'border-border'
+                  }`}
+                  onClick={() => setSelectedPaymentMethod('paypal')}
+                >
                   <div className="flex items-center justify-between">
                     <div className="flex items-center space-x-3">
                       <img src={paypalLogo} alt="PayPal" className="w-8 h-8 object-contain" />
@@ -321,7 +329,14 @@ export const BenefitsForm = () => {
                   </div>
                 </button>
 
-                <button className="w-full p-4 border-2 border-border rounded-lg hover:bg-accent transition-colors text-left">
+                <button 
+                  className={`w-full p-4 border-2 rounded-lg hover:bg-accent transition-colors text-left ${
+                    selectedPaymentMethod === 'bank' 
+                      ? 'border-primary bg-primary/5' 
+                      : 'border-border'
+                  }`}
+                  onClick={() => setSelectedPaymentMethod('bank')}
+                >
                   <div className="flex items-center justify-between">
                     <div className="flex items-center space-x-3">
                       <div className="w-8 h-8 bg-gray-600 rounded flex items-center justify-center text-white font-bold text-sm">🏦</div>
@@ -339,22 +354,16 @@ export const BenefitsForm = () => {
 
               <div className="flex flex-col space-y-3">
                 <Button 
-                  className="w-full h-12 text-base font-normal bg-emerald-600 hover:bg-emerald-700 text-white"
+                  className="w-full h-12 text-base font-normal bg-emerald-600 hover:bg-emerald-700 text-white disabled:opacity-50"
                   onClick={() => setCurrentStep(4)}
+                  disabled={!selectedPaymentMethod}
                 >
                   Continue to Claim Funds
-                </Button>
-                <Button 
-                  variant="outline" 
-                  className="w-full h-12"
-                  onClick={() => setCurrentStep(2)}
-                >
-                  ← Back
                 </Button>
               </div>
 
               <p className="text-sm text-muted-foreground mt-4">
-                Or tap a payout method above for instant redirect
+                {selectedPaymentMethod ? 'Ready to proceed' : 'Please select a payment method above'}
               </p>
             </div>
           )}
@@ -369,16 +378,6 @@ export const BenefitsForm = () => {
                     __html: `<vturb-smartplayer id="vid-68d8a308d682a389eb6ed723" style="display: block; margin: 0 auto; width: 100%;"></vturb-smartplayer>`
                   }}
                 />
-              </div>
-              
-              <div className="flex flex-col space-y-3">
-                <Button 
-                  variant="outline" 
-                  className="w-full h-12"
-                  onClick={() => setCurrentStep(3)}
-                >
-                  ← Back
-                </Button>
               </div>
             </div>
           )}
