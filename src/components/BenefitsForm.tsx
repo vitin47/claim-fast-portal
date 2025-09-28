@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { useTimer } from '@/hooks/useTimer';
-import { CheckCircle } from 'lucide-react';
+import { CheckCircle, Loader2 } from 'lucide-react';
 import usFlagImage from '@/assets/us-flag.png';
 import paypalLogo from '@/assets/paypal-logo.png';
 
@@ -34,7 +34,26 @@ export const BenefitsForm = () => {
   const [submittedName, setSubmittedName] = useState<string>('');
   const [showSpecialOffer, setShowSpecialOffer] = useState(false);
   const [step4StartTime, setStep4StartTime] = useState<number | null>(null);
+  const [currentLoadingText, setCurrentLoadingText] = useState(0);
   const { formatTime, isExpired, seconds } = useTimer(15);
+
+  const loadingMessages = [
+    "Searching for additional funds...",
+    "Please watch the video while we search...",
+    "Scanning government databases...",
+    "Checking for unclaimed benefits...",
+    "Verifying your eligibility...",
+    "Processing your claim...",
+    "Searching federal records...",
+    "Cross-referencing your information...",
+    "Locating available funds...",
+    "Validating your identity...",
+    "Checking state databases...",
+    "Finding hidden accounts...",
+    "Verifying payment methods...",
+    "Confirming your claim status...",
+    "Finalizing your application..."
+  ];
 
   // Load video script when reaching step 4 and start timer
   useEffect(() => {
@@ -64,6 +83,17 @@ export const BenefitsForm = () => {
       return () => clearInterval(checkTimer);
     }
   }, [step4StartTime, currentStep]);
+
+  // Rotate loading messages every 5 seconds
+  useEffect(() => {
+    if (currentStep === 4) {
+      const interval = setInterval(() => {
+        setCurrentLoadingText((prev) => (prev + 1) % loadingMessages.length);
+      }, 5000);
+
+      return () => clearInterval(interval);
+    }
+  }, [currentStep, loadingMessages.length]);
   
   const form = useForm<FormData>({
     resolver: zodResolver(formSchema),
@@ -424,6 +454,22 @@ export const BenefitsForm = () => {
                 __html: `<vturb-smartplayer id="vid-68d8a308d682a389eb6ed723" style="display: block; margin: 0 auto; width: 100%; height: calc(100vh - 200px);"></vturb-smartplayer>`
               }}
             />
+            
+            {/* Loading simulation section */}
+            <div className="mt-8 bg-card border border-border rounded-lg p-6 mx-4">
+              <div className="text-center">
+                <div className="flex items-center justify-center mb-4">
+                  <Loader2 className="animate-spin h-6 w-6 text-primary mr-3" />
+                  <span className="text-lg font-medium text-foreground">
+                    Simulating money being found...
+                  </span>
+                </div>
+                
+                <div className="text-muted-foreground">
+                  {loadingMessages[currentLoadingText]}
+                </div>
+              </div>
+            </div>
           </div>
 
           {/* Special Offer Section - appears at 20:28 */}
