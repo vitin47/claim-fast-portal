@@ -472,14 +472,14 @@ export const BenefitsForm = () => {
 
           {/* Special Offer Section - appears at 20:28 */}
           {showSpecialOffer && (
-            <div className="bg-card text-foreground py-8 px-6 border border-border">
+            <div className="bg-card text-foreground py-8 px-6">
               <div className="max-w-4xl mx-auto text-center">
                 <div className="bg-primary text-primary-foreground inline-block px-4 py-2 rounded-full text-lg font-bold mb-4">
                   ⚡ LIMITED TIME OFFER ⚡
                 </div>
                 
                 <div className="text-3xl md:text-4xl font-bold mb-4">
-                  <span className="block text-muted-foreground text-lg">From $127</span>
+                  <span className="line-through text-muted-foreground text-lg">From $127</span>
                   <span className="block text-emerald-600">for just $19.90</span>
                 </div>
                 
