@@ -244,6 +244,58 @@ export const BenefitsForm = () => {
               )}
             </div>
           )}
+
+          {currentStep === 3 && (
+            <div className="text-center">
+              <h2 className="text-2xl font-bold text-foreground mb-2">Choose payout method</h2>
+              <p className="text-muted-foreground mb-6">
+                Select how you'd like to receive your funds. Processing will begin immediately.
+              </p>
+
+              <div className="bg-emerald-50 border-2 border-emerald-500 rounded-lg p-4 mb-6">
+                <div className="text-sm text-emerald-700 mb-1">Estimated claim for e. rt</div>
+                <div className="text-3xl font-bold text-foreground">$2,324.00</div>
+                <div className="text-emergency font-bold text-sm">EXPIRES SOON</div>
+              </div>
+
+              <div className="space-y-4 mb-6">
+                <button className="w-full p-4 border-2 border-primary rounded-lg hover:bg-primary/5 transition-colors text-left">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <div className="font-bold text-foreground">PayPal</div>
+                      <div className="text-sm text-muted-foreground">Instant transfer</div>
+                    </div>
+                    <div className="bg-emerald-100 text-emerald-700 px-2 py-1 rounded text-xs font-bold">
+                      INSTANT
+                    </div>
+                  </div>
+                </button>
+
+                <button className="w-full p-4 border-2 border-border rounded-lg hover:bg-accent transition-colors text-left">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <div className="font-bold text-foreground">Bank Deposit</div>
+                      <div className="text-sm text-muted-foreground">Direct to account</div>
+                    </div>
+                    <div className="bg-emerald-100 text-emerald-700 px-2 py-1 rounded text-xs font-bold">
+                      INSTANT
+                    </div>
+                  </div>
+                </button>
+              </div>
+
+              <Button 
+                className="w-full h-12 text-base font-medium bg-emerald-600 hover:bg-emerald-700 text-white mb-4"
+                onClick={() => setCurrentStep(4)}
+              >
+                Continue to Claim Funds
+              </Button>
+
+              <p className="text-sm text-muted-foreground">
+                Or tap a payout method above for instant redirect
+              </p>
+            </div>
+          )}
         </div>
       </main>
     </div>
