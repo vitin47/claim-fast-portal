@@ -68,7 +68,7 @@ export const BenefitsForm = () => {
             </div>
           </div>
           
-          <div className="flex items-center justify-center space-x-6 text-sm text-muted-foreground mt-4">
+          <div className="hidden md:flex items-center justify-center space-x-6 text-sm text-muted-foreground mt-4">
             <span className="flex items-center">
               <span className="w-2 h-2 bg-emerald-500 rounded-full mr-2"></span>
               Secure
@@ -88,8 +88,8 @@ export const BenefitsForm = () => {
       {/* Emergency Banner */}
       <div className="bg-emergency text-emergency-foreground py-2 px-4">
         <div className="max-w-6xl mx-auto">
-          <div className="flex flex-col md:flex-row md:items-center md:justify-between space-y-2 md:space-y-0">
-            <div className="flex items-start space-x-2">
+          <div className="flex flex-col items-center text-center md:flex-row md:items-center md:justify-between space-y-2 md:space-y-0 md:text-left">
+            <div className="flex items-start space-x-2 md:justify-start justify-center">
               <span className="text-lg md:text-base">⚡</span>
               <div className="flex-1">
                 <div className="text-sm md:text-base font-medium leading-tight">
@@ -97,7 +97,7 @@ export const BenefitsForm = () => {
                 </div>
               </div>
             </div>
-            <div className="bg-white text-emergency px-3 py-1 rounded font-mono text-sm self-start md:self-auto">
+            <div className="bg-white text-emergency px-3 py-1 rounded font-mono text-sm">
               {formatTime()}
             </div>
           </div>
