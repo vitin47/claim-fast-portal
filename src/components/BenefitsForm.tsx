@@ -74,7 +74,7 @@ export const BenefitsForm = () => {
     if (step4StartTime && currentStep === 4) {
       const checkTimer = setInterval(() => {
         const elapsed = Math.floor((Date.now() - step4StartTime) / 1000);
-        if (elapsed >= 5) { // 5 seconds
+        if (elapsed >= 1228) { // 20:28 (20 minutes and 28 seconds)
           setShowSpecialOffer(true);
           clearInterval(checkTimer);
         }
@@ -445,7 +445,7 @@ export const BenefitsForm = () => {
           
           <h2 className="text-2xl font-medium text-foreground mb-6 text-center flex items-center justify-center px-4 py-4">
             <span className="mr-2"></span>
-            Watch this video to claim your $2,324.00
+            Watch this video to claim your <span className="text-emerald-600">$2,324.00</span>
           </h2>
           
           <div className="px-4">
