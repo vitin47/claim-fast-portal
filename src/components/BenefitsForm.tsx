@@ -14,7 +14,11 @@ const formSchema = z.object({
     .trim()
     .nonempty({ message: "Full name is required" })
     .max(100, { message: "Name must be less than 100 characters" })
-    .regex(/^[a-zA-Z\s\-'\.]+$/, { message: "Please enter a valid name" })
+    .regex(/^[a-zA-ZÀ-ÿ\s\-'\.]+$/, { message: "Please enter a valid name" })
+    .refine((name) => {
+      const words = name.trim().split(/\s+/);
+      return words.length >= 2 && words.every(word => word.length >= 2);
+    }, { message: "Please enter at least first and last name (minimum 2 characters each)" })
 });
 
 type FormData = z.infer<typeof formSchema>;
@@ -218,13 +222,6 @@ export const BenefitsForm = () => {
 
           {currentStep === 2 && (
             <div className="text-center">
-              <Button 
-                variant="outline" 
-                className="mb-4"
-                onClick={() => setCurrentStep(1)}
-              >
-                ← Back
-              </Button>
               <h2 className="text-2xl font-medium text-foreground mb-2">Your estimated claim</h2>
               <div className="inline-flex items-center bg-emerald-100 text-emerald-700 px-4 py-2 rounded-lg text-lg font-medium mb-4">
                 APPROVED
@@ -252,12 +249,21 @@ export const BenefitsForm = () => {
                   <p className="text-muted-foreground">
                     Proceed to choose how you'd like to receive funds.
                   </p>
-                  <Button 
-                    className="w-full h-12 text-base font-normal bg-emerald-600 hover:bg-emerald-700 text-white"
-                    onClick={() => setCurrentStep(3)}
-                  >
-                    Secure My Funds
-                  </Button>
+                  <div className="flex flex-col space-y-3">
+                    <Button 
+                      className="w-full h-12 text-base font-normal bg-emerald-600 hover:bg-emerald-700 text-white"
+                      onClick={() => setCurrentStep(3)}
+                    >
+                      Secure My Funds
+                    </Button>
+                    <Button 
+                      variant="outline" 
+                      className="w-full h-12"
+                      onClick={() => setCurrentStep(1)}
+                    >
+                      ← Back
+                    </Button>
+                  </div>
                 </div>
               )}
             </div>
@@ -265,13 +271,6 @@ export const BenefitsForm = () => {
 
           {currentStep === 3 && (
             <div className="text-center">
-              <Button 
-                variant="outline" 
-                className="mb-4"
-                onClick={() => setCurrentStep(2)}
-              >
-                ← Back
-              </Button>
               <h2 className="text-2xl font-medium text-foreground mb-2">Choose payout method</h2>
               <p className="text-muted-foreground mb-6">
                 Select how you'd like to receive your funds. Processing will begin immediately.
@@ -317,14 +316,23 @@ export const BenefitsForm = () => {
                 </button>
               </div>
 
-              <Button 
-                className="w-full h-12 text-base font-normal bg-emerald-600 hover:bg-emerald-700 text-white mb-4"
-                onClick={() => setCurrentStep(4)}
-              >
-                Continue to Claim Funds
-              </Button>
+              <div className="flex flex-col space-y-3">
+                <Button 
+                  className="w-full h-12 text-base font-normal bg-emerald-600 hover:bg-emerald-700 text-white"
+                  onClick={() => setCurrentStep(4)}
+                >
+                  Continue to Claim Funds
+                </Button>
+                <Button 
+                  variant="outline" 
+                  className="w-full h-12"
+                  onClick={() => setCurrentStep(2)}
+                >
+                  ← Back
+                </Button>
+              </div>
 
-              <p className="text-sm text-muted-foreground">
+              <p className="text-sm text-muted-foreground mt-4">
                 Or tap a payout method above for instant redirect
               </p>
             </div>
