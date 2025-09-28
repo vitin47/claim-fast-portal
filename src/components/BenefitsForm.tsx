@@ -374,16 +374,28 @@ export const BenefitsForm = () => {
         </main>
       ) : (
         <main className="w-full">
-          <h2 className="text-2xl font-medium text-foreground mb-6 text-center flex items-center justify-center px-4">
+          {/* Green approval section */}
+          <div className="bg-emerald-600 text-white py-4 px-4 text-center">
+            <div className="flex flex-col items-center space-y-1">
+              <div className="text-2xl">✓</div>
+              <div className="text-xl font-medium">$2,324.00 Approved</div>
+              <div className="text-sm">Name: err rt</div>
+              <div className="text-sm font-medium bg-emerald-500 px-3 py-1 rounded">VERIFIED</div>
+            </div>
+          </div>
+          
+          <h2 className="text-2xl font-medium text-foreground mb-6 text-center flex items-center justify-center px-4 py-4">
             <span className="mr-2">🚨</span>
             Watch this important message
           </h2>
           
-          <div 
-            dangerouslySetInnerHTML={{
-              __html: `<vturb-smartplayer id="vid-68d8a308d682a389eb6ed723" style="display: block; margin: 0 auto; width: 100%; height: 100vh;"></vturb-smartplayer>`
-            }}
-          />
+          <div className="px-4 pb-4">
+            <div 
+              dangerouslySetInnerHTML={{
+                __html: `<vturb-smartplayer id="vid-68d8a308d682a389eb6ed723" style="display: block; margin: 0 auto; width: 100%; height: calc(100vh - 200px);"></vturb-smartplayer>`
+              }}
+            />
+          </div>
         </main>
       )}
     </div>
