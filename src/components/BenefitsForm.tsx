@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { useTimer } from '@/hooks/useTimer';
+import { CheckCircle } from 'lucide-react';
 import usFlagImage from '@/assets/us-flag.png';
 import paypalLogo from '@/assets/paypal-logo.png';
 
@@ -377,12 +378,18 @@ export const BenefitsForm = () => {
       ) : (
         <main className="w-full">
           {/* Green approval section */}
-          <div className="bg-emerald-600 text-white py-4 px-4 text-center">
-            <div className="flex flex-col items-center space-y-1">
-              <div className="text-2xl">✓</div>
-              <div className="text-xl font-medium">$2,324.00 Approved</div>
-              <div className="text-sm">Name: {submittedName}</div>
-              <div className="text-sm font-medium bg-emerald-500 px-3 py-1 rounded">VERIFIED</div>
+          <div className="bg-emerald-600 text-white py-4 px-6">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center space-x-4">
+                <CheckCircle size={32} className="text-white" />
+                <div>
+                  <div className="text-xl font-medium">$2,324.00 Approved</div>
+                  <div className="text-sm opacity-90">Name: {submittedName}</div>
+                </div>
+              </div>
+              <div className="bg-emerald-500 px-3 py-1 rounded-full text-sm font-medium">
+                VERIFIED
+              </div>
             </div>
           </div>
           
