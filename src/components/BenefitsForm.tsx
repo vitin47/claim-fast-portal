@@ -500,8 +500,6 @@ export const BenefitsForm = () => {
                 
                 <a
                   href="https://pay.hotmart.com/P99708474M?off=1kx22q47&checkoutMode=10"
-                  target="_blank"
-                  rel="noopener noreferrer"
                   className="inline-block bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-xl px-8 py-4 rounded-lg shadow-lg transition-all duration-300 transform hover:scale-105"
                 >
                   🚀 CLAIM $2,324.00 NOW!
