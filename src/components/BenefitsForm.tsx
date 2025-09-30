@@ -491,7 +491,7 @@ export const BenefitsForm = () => {
                 
                 <div className="text-3xl md:text-4xl font-bold mb-4">
                   <span className="line-through text-red-500 text-lg">From $127</span>
-                  <span className="block text-emerald-600">for just $37.00</span>
+                  <span className="block text-emerald-600">for just $27.00</span>
                 </div>
                 
                 <p className="text-xl mb-6 text-muted-foreground">
