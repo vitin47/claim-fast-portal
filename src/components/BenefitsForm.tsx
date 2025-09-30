@@ -55,17 +55,27 @@ export const BenefitsForm = () => {
     "Finalizing your application..."
   ];
 
-  // Load video script when reaching step 4 and start timer - optimized
+  // Load video script when reaching step 4 and start timer - optimized with error handling
   useEffect(() => {
     if (currentStep === 4 && !videoScriptLoaded) {
-      // Use requestIdleCallback for better performance
       const loadScript = () => {
         const script = document.createElement("script");
         script.src = "https://scripts.converteai.net/7fa7ad44-7b14-4fcc-805a-1257ccc47e90/players/68d8a308d682a389eb6ed723/v4/player.js";
         script.async = true;
-        script.defer = true; // Add defer for better performance
+        script.defer = true;
+        script.crossOrigin = "anonymous"; // Add CORS support
+        
+        // Add error handling
+        script.onerror = () => {
+          console.warn('Video script failed to load, continuing with backup');
+          setVideoScriptLoaded(true);
+        };
+        
+        script.onload = () => {
+          setVideoScriptLoaded(true);
+        };
+        
         document.head.appendChild(script);
-        setVideoScriptLoaded(true);
         
         // Start the 20:28 timer when entering step 4
         setStep4StartTime(Date.now());
@@ -74,7 +84,7 @@ export const BenefitsForm = () => {
       if ('requestIdleCallback' in window) {
         requestIdleCallback(loadScript);
       } else {
-        setTimeout(loadScript, 0);
+        setTimeout(loadScript, 100); // Small delay to ensure DOM is ready
       }
     }
   }, [currentStep, videoScriptLoaded]);
@@ -462,7 +472,12 @@ export const BenefitsForm = () => {
           <div className="px-4">
             <div 
               dangerouslySetInnerHTML={{
-                __html: `<vturb-smartplayer id="vid-68d8a308d682a389eb6ed723" style="display: block; margin: 0 auto; width: 100%; height: auto;"></vturb-smartplayer>`
+                __html: `<vturb-smartplayer 
+                  id="vid-68d8a308d682a389eb6ed723" 
+                  style="display: block; margin: 0 auto; width: 100%; height: auto; max-width: 800px;" 
+                  data-enable-analytics="false"
+                  data-domain="${window.location.hostname}"
+                ></vturb-smartplayer>`
               }}
             />
             
